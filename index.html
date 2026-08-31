@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Data Insight Dashboard</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- D3.js -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==============================
+         HERO
+    =============================== -->
+
+    <header class="hero">
+
+        <div class="hero-circle circle-one"></div>
+        <div class="hero-circle circle-two"></div>
+
+        <div class="hero-content">
+
+            <div>
+
+                <div class="eyebrow">
+                    DATA VISUALIZATION
+                </div>
+
+                <h1>
+                    Data Insight
+                    <span>Dashboard</span>
+                </h1>
+
+                <p>
+                    Interactive data visualization dashboard
+                    developed with D3.js
+                </p>
+
+            </div>
+
+            <div class="status">
+
+                <span class="status-dot"></span>
+
+                Interactive Dashboard
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==============================
+         MAIN
+    =============================== -->
+
+    <main class="container">
+
+
+        <!-- ==============================
+             SUMMARY CARDS
+        =============================== -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+
+                <div class="summary-icon revenue">
+                    $
+                </div>
+
+                <div>
+
+                    <div class="summary-label">
+                        Highest Revenue
+                    </div>
+
+                    <div
+                        class="summary-value"
+                        id="highestRevenue">
+                        -
+                    </div>
+
+                    <div
+                        class="summary-detail"
+                        id="highestRevenueDetail">
+                        -
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon temperature">
+                    °C
+                </div>
+
+                <div>
+
+                    <div class="summary-label">
+                        Highest Temperature
+                    </div>
+
+                    <div
+                        class="summary-value"
+                        id="highestTemperature">
+                        -
+                    </div>
+
+                    <div
+                        class="summary-detail"
+                        id="highestTemperatureDetail">
+                        -
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon fuel">
+                    MPG
+                </div>
+
+                <div>
+
+                    <div class="summary-label">
+                        Highest Fuel Efficiency
+                    </div>
+
+                    <div
+                        class="summary-value"
+                        id="highestMPG">
+                        -
+                    </div>
+
+                    <div
+                        class="summary-detail"
+                        id="highestMPGDetail">
+                        -
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon dataset">
+                    #
+                </div>
+
+                <div>
+
+                    <div class="summary-label">
+                        Total Datasets
+                    </div>
+
+                    <div class="summary-value">
+                        3
+                    </div>
+
+                    <div class="summary-detail">
+                        Interactive Visualizations
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             CHART 01
+             REVENUE
+        =============================== -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div class="section-title">
+
+                    <div class="section-number">
+                        01
+                    </div>
+
+                    <div>
+
+                        <div class="section-tag">
+                            REVENUE ANALYSIS
+                        </div>
+
+                        <h2>
+                            Monthly Revenue
+                        </h2>
+
+                        <p>
+                            Line & Scatter Chart
+                            สำหรับแสดงแนวโน้มและจุดข้อมูลรายได้
+                            ของแต่ละสาขา
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="filter-box">
+
+                    <label>
+                        Branch
+                    </label>
+
+                    <select id="revenueFilter">
+
+                        <option value="all">
+                            All Branches
+                        </option>
+
+                        <option value="branchA">
+                            Branch A
+                        </option>
+
+                        <option value="branchB">
+                            Branch B
+                        </option>
+
+                        <option value="branchC">
+                            Branch C
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-card">
+
+                <div class="chart-header">
+
+                    <div>
+
+                        <h3>
+                            Revenue Trend
+                        </h3>
+
+                        <span>
+                            Monthly revenue comparison
+                        </span>
+
+                    </div>
+
+                    <div class="chart-badge">
+                        LINE + SCATTER
+                    </div>
+
+                </div>
+
+                <div
+                    id="revenueChart"
+                    class="chart-container">
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             CHART 02
+             TEMPERATURE
+        =============================== -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div class="section-title">
+
+                    <div class="section-number">
+                        02
+                    </div>
+
+                    <div>
+
+                        <div class="section-tag">
+                            TEMPERATURE ANALYSIS
+                        </div>
+
+                        <h2>
+                            Average Temperature by City
+                        </h2>
+
+                        <p>
+                            Bar Chart สำหรับเปรียบเทียบ
+                            อุณหภูมิเฉลี่ยของแต่ละเมือง
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="filter-box">
+
+                    <label>
+                        City
+                    </label>
+
+                    <select id="temperatureFilter">
+
+                        <option value="all">
+                            All Cities
+                        </option>
+
+                        <option value="Bangkok">
+                            Bangkok
+                        </option>
+
+                        <option value="Tokyo">
+                            Tokyo
+                        </option>
+
+                        <option value="New York">
+                            New York
+                        </option>
+
+                        <option value="London">
+                            London
+                        </option>
+
+                        <option value="Sydney">
+                            Sydney
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-card">
+
+                <div class="chart-header">
+
+                    <div>
+
+                        <h3>
+                            City Temperature
+                        </h3>
+
+                        <span>
+                            Average temperature comparison
+                        </span>
+
+                    </div>
+
+                    <div class="chart-badge">
+                        BAR CHART
+                    </div>
+
+                </div>
+
+                <div
+                    id="temperatureChart"
+                    class="chart-container">
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             CHART 03
+             CAR
+        =============================== -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div class="section-title">
+
+                    <div class="section-number">
+                        03
+                    </div>
+
+                    <div>
+
+                        <div class="section-tag">
+                            AUTOMOTIVE ANALYSIS
+                        </div>
+
+                        <h2>
+                            Car Fuel Efficiency
+                        </h2>
+
+                        <p>
+                            Scatter Plot แสดงความสัมพันธ์ระหว่าง
+                            ขนาดเครื่องยนต์และประสิทธิภาพน้ำมัน
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="filter-box">
+
+                    <label>
+                        Vehicle
+                    </label>
+
+                    <select id="carFilter">
+
+                        <option value="all">
+                            All Vehicles
+                        </option>
+
+                        <option value="Sedan">
+                            Sedan
+                        </option>
+
+                        <option value="SUV">
+                            SUV
+                        </option>
+
+                        <option value="Truck">
+                            Truck
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-card">
+
+                <div class="chart-header">
+
+                    <div>
+
+                        <h3>
+                            Engine Size vs MPG
+                        </h3>
+
+                        <span>
+                            Fuel efficiency relationship
+                        </span>
+
+                    </div>
+
+                    <div class="chart-badge">
+                        SCATTER PLOT
+                    </div>
+
+                </div>
+
+                <div
+                    id="carChart"
+                    class="chart-container">
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             KEY FINDINGS
+        =============================== -->
+
+        <section class="content-section">
+
+            <div class="content-heading">
+
+                <div class="section-tag">
+                    KEY FINDINGS
+                </div>
+
+                <h2>
+                    สรุปข้อมูลสำคัญ
+                </h2>
+
+                <p>
+                    ประเด็นสำคัญที่สามารถสังเกตได้จากข้อมูล
+                </p>
+
+            </div>
+
+
+            <div class="finding-grid">
+
+
+                <div class="finding-card">
+
+                    <div class="finding-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Monthly Revenue
+                    </h3>
+
+                    <p>
+                        รายได้ของทั้ง 3 สาขามีแนวโน้มเพิ่มขึ้น
+                        ตั้งแต่ January ถึง April
+                        โดย Branch A มีรายได้สูงที่สุด
+                        ในทุกเดือน
+                    </p>
+
+                </div>
+
+
+                <div class="finding-card">
+
+                    <div class="finding-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Temperature
+                    </h3>
+
+                    <p>
+                        Bangkok มีอุณหภูมิเฉลี่ยสูงที่สุด
+                       ที่ 32°C ขณะที่ London
+                        มีอุณหภูมิเฉลี่ยต่ำที่สุดที่ 18°C
+                    </p>
+
+                </div>
+
+
+                <div class="finding-card">
+
+                    <div class="finding-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Fuel Efficiency
+                    </h3>
+
+                    <p>
+                        รถที่มีขนาดเครื่องยนต์เล็กกว่า
+                        มีแนวโน้มที่จะมีค่า MPG สูงกว่า
+                        โดย Sedan A มีประสิทธิภาพสูงที่สุด
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             BENEFITS
+        =============================== -->
+
+        <section class="content-section">
+
+            <div class="content-heading">
+
+                <div class="section-tag">
+                    DATA VISUALIZATION
+                </div>
+
+                <h2>
+                    ประโยชน์ของการใช้เทคโนโลยี
+                    การแสดงผลข้อมูล
+                </h2>
+
+                <p>
+                    การแสดงผลข้อมูลช่วยให้ผู้วิเคราะห์
+                    เข้าใจข้อมูลและค้นพบประเด็นสำคัญได้ง่ายขึ้น
+                </p>
+
+            </div>
+
+
+            <div class="benefit-grid">
+
+
+                <div class="benefit-card">
+
+                    <div class="benefit-number">
+                        01
+                    </div>
+
+                    <h3>
+                        ช่วยให้เข้าใจข้อมูลได้ง่าย
+                    </h3>
+
+                    <p>
+                        การนำข้อมูลที่อยู่ในรูปแบบตาราง
+                        มาแสดงเป็นกราฟช่วยลดความซับซ้อน
+                        และทำให้ผู้ใช้สามารถเข้าใจข้อมูล
+                        ได้อย่างรวดเร็ว
+                    </p>
+
+                    <div class="example">
+
+                        <strong>
+                            ตัวอย่าง
+                        </strong>
+
+                        <p>
+                            Bar Chart ทำให้สามารถเห็นความแตกต่าง
+                            ของอุณหภูมิในแต่ละเมืองได้ทันที
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="benefit-card">
+
+                    <div class="benefit-number">
+                        02
+                    </div>
+
+                    <h3>
+                        ช่วยมองเห็นแนวโน้ม
+                    </h3>
+
+                    <p>
+                        กราฟช่วยให้สามารถสังเกตการเปลี่ยนแปลง
+                        และแนวโน้มของข้อมูลได้ง่าย
+                        โดยเฉพาะข้อมูลที่มีลำดับตามเวลา
+                    </p>
+
+                    <div class="example">
+
+                        <strong>
+                            ตัวอย่าง
+                        </strong>
+
+                        <p>
+                            Line Chart ช่วยให้เห็นแนวโน้ม
+                            รายได้ของแต่ละ Branch
+                            ตั้งแต่ January ถึง April
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="benefit-card">
+
+                    <div class="benefit-number">
+                        03
+                    </div>
+
+                    <h3>
+                        สนับสนุนการตัดสินใจ
+                    </h3>
+
+                    <p>
+                        การแสดงผลข้อมูลทำให้สามารถ
+                        เปรียบเทียบข้อมูลและใช้ข้อมูล
+                        ประกอบการตัดสินใจได้อย่างมีประสิทธิภาพ
+                    </p>
+
+                    <div class="example">
+
+                        <strong>
+                            ตัวอย่าง
+                        </strong>
+
+                        <p>
+                            Scatter Plot สามารถช่วยวิเคราะห์
+                            ความสัมพันธ์ระหว่างขนาดเครื่องยนต์
+                            และค่า MPG
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             PROS & CONS
+        =============================== -->
+
+        <section class="content-section">
+
+            <div class="content-heading">
+
+                <div class="section-tag">
+                    ANALYSIS
+                </div>
+
+                <h2>
+                    ข้อดีและข้อเสียของ
+                    Data Visualization
+                </h2>
+
+                <p>
+                    การวิเคราะห์ข้อดีและข้อจำกัด
+                    ของเทคโนโลยีการแสดงผลข้อมูล
+                </p>
+
+            </div>
+
+
+            <div class="pros-cons">
+
+
+                <!-- ADVANTAGES -->
+
+                <div class="pros-card">
+
+                    <div class="pc-heading">
+
+                        <div class="pc-icon positive">
+                            +
+                        </div>
+
+                        <div>
+
+                            <span>
+                                ADVANTAGES
+                            </span>
+
+                            <h3>
+                                ข้อดี
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="pc-item">
+
+                        <h4>
+                            01 — วิเคราะห์ข้อมูลได้รวดเร็ว
+                        </h4>
+
+                        <p>
+                            กราฟช่วยให้ผู้วิเคราะห์สามารถมองเห็น
+                            แนวโน้มและความแตกต่างของข้อมูล
+                            ได้เร็วกว่าการอ่านข้อมูลจากตาราง
+                        </p>
+
+                    </div>
+
+
+                    <div class="pc-item">
+
+                        <h4>
+                            02 — เปรียบเทียบข้อมูลได้ง่าย
+                        </h4>
+
+                        <p>
+                            สามารถนำข้อมูลหลายกลุ่มมาแสดง
+                            ในรูปแบบเดียวกัน ทำให้เปรียบเทียบ
+                            ข้อมูลได้สะดวก
+                        </p>
+
+                    </div>
+
+
+                    <div class="pc-item">
+
+                        <h4>
+                            03 — ช่วยค้นพบความสัมพันธ์
+                        </h4>
+
+                        <p>
+                            การใช้ Scatter Plot สามารถช่วยให้
+                            เห็นรูปแบบหรือความสัมพันธ์ระหว่าง
+                            ตัวแปรที่อาจมองไม่เห็นจากตาราง
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- LIMITATIONS -->
+
+                <div class="cons-card">
+
+                    <div class="pc-heading">
+
+                        <div class="pc-icon negative">
+                            −
+                        </div>
+
+                        <div>
+
+                            <span>
+                                LIMITATIONS
+                            </span>
+
+                            <h3>
+                                ข้อเสีย
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="pc-item">
+
+                        <h4>
+                            01 — อาจทำให้ตีความผิด
+                        </h4>
+
+                        <p>
+                            หากเลือกชนิดกราฟหรือกำหนดแกน
+                            ไม่เหมาะสม อาจทำให้ผู้ใช้เข้าใจ
+                            ข้อมูลหรือแนวโน้มคลาดเคลื่อน
+                        </p>
+
+                    </div>
+
+
+                    <div class="pc-item">
+
+                        <h4>
+                            02 — ใช้เวลาในการออกแบบ
+                        </h4>
+
+                        <p>
+                            การสร้าง Dashboard ที่มีคุณภาพ
+                            ต้องใช้เวลาในการออกแบบกราฟ
+                            สี การจัดวาง และ Interaction
+                        </p>
+
+                    </div>
+
+
+                    <div class="pc-item">
+
+                        <h4>
+                            03 — อาจไม่แสดงรายละเอียดทั้งหมด
+                        </h4>
+
+                        <p>
+                            การสรุปข้อมูลเป็นกราฟอาจทำให้
+                            รายละเอียดบางส่วนของข้อมูลต้นฉบับ
+                            ไม่ได้ถูกแสดงทั้งหมด
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ==============================
+         TOOLTIP
+    =============================== -->
+
+    <div
+        id="tooltip"
+        class="tooltip">
+    </div>
+
+
+
+    <!-- ==============================
+         FOOTER
+    =============================== -->
+
+    <footer>
+
+        <div class="footer-title">
+            นางสาวอาทิตญา  โมลากุล
+        </div>
+
+        <p>
+            DATA INSIGHT DASHBOARD
+            Interactive Data Visualization with D3.js
+        </p>
+
+    </footer>
+
+
+
+    <!-- JS -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
